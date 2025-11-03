@@ -6,6 +6,7 @@ import 'primeflex/primeflex.css';
 import { PrimeReactProvider } from 'primereact/api';
 import { Inter } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/registry';
+import { UserProvider } from '@/context/UserContext';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <PrimeReactProvider>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </PrimeReactProvider>
+        <UserProvider>
+          <PrimeReactProvider>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </PrimeReactProvider>
+        </UserProvider>
       </body>
     </html>
   );

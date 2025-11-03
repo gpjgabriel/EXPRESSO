@@ -1,10 +1,11 @@
 'use client';
 
-import { Button } from 'primereact/button';
-import * as Styled from './navbar.js';
+import * as Styled from './header.js';
+import { useUser } from '@/context/UserContext';
 
 
-export default function Navbar() {
+export default function Header() {
+  const { user } = useUser();
   const menuItems = [
     { label: 'Adicionar', icon: 'pi pi-plus' },
     { label: 'Contas à Pagar', icon: 'pi pi-arrow-down' },
@@ -12,7 +13,6 @@ export default function Navbar() {
     { label: 'Relatórios', icon: 'pi pi-chart-bar' },
   ];
 
-  const user = { name: 'Admin', department: 'Financeiro' };
 
   return (
     <Styled.Header>
@@ -33,10 +33,10 @@ export default function Navbar() {
 
           <Styled.UserInfo>
             <div className='user-details'>
-              <span className='user-name'>{user.name}</span>
-              <span className='user-department'>{user.department}</span>
+              <span className='user-name'>{user.name || 'Usuário'}</span>
+              <span className='user-department'>{user.department || 'Departamento'}</span>
             </div>
-            <Styled.UserAvatar label={user.name.charAt(0).toUpperCase()} size="large" />
+            <Styled.UserAvatar label={user.name?.charAt(0).toUpperCase() || 'U'} size="large" />
           </Styled.UserInfo>
         </Styled.RightMenu>
       </Styled.Nav>
