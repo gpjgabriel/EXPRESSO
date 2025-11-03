@@ -1,13 +1,11 @@
 'use client';
-import styled from 'styled-components';
+import Navbar from '@/Components/header/navbar';
 
 
 export default function Home() {
   return (
     <div>
-      <Main>
-        <h1>Iniciando Projeto</h1>
-      </Main>
+      <Navbar />
     </div>
   );
 }
