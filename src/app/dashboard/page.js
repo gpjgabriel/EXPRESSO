@@ -1,6 +1,7 @@
 'use client';
 import Header from '@/Components/header';
 import FilterBar from '@/Components/filterBar';
+import InfoCards from '@/Components/infoCards';
 
 
 export default function Dashboard() {
@@ -8,9 +9,7 @@ export default function Dashboard() {
     <>
       <Header />
       <FilterBar />
-      {/* <Content>
-        <div>conteúdo do dashboard</div>
-      </Content> */}
+      <InfoCards />
     </>
   );
 }
