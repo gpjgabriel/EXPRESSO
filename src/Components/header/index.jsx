@@ -1,6 +1,6 @@
 'use client';
 
-import * as Styled from './header.js';
+import * as Styled from './styles.js';
 import { useUser } from '@/context/UserContext';
 
 

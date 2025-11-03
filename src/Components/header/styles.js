@@ -72,8 +72,8 @@ export const UserInfo = styled.div`
 `;
 
 export const UserAvatar = styled(Avatar)`
-    background: #ede9fe;
-    color: #5b21b6;
+  background: #ede9fe;
+  color: #4c1d95;
   font-weight: 600;
   text-transform: uppercase;
 `;

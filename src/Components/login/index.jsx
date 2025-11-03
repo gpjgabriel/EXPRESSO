@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import * as Styled from './login.js';
+import * as Styled from './styles.js';
 import { useUser  } from '@/context/UserContext';
 
 
