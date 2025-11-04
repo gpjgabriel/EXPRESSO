@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import * as Styled from './styles.js';
 import { useUser  } from '@/context/UserContext';
 import { Skeleton } from 'primereact/skeleton';
+import Loading from './loading.js';
 
 
 export default function Login() {
@@ -31,40 +32,29 @@ export default function Login() {
       router.push('/dashboard');
   };
 
+  if (loading) return <Loading />;
+
   return (
     <Styled.Container>
       <Styled.ContentCard>
-        {loading ? (
-          <>
-            <Skeleton height="5rem" className="mb-6" />
-            <Styled.FormGroup>
-              <Skeleton height="2.5rem" />
-              <Skeleton height="2.5rem" />
-            </Styled.FormGroup>
-            <Skeleton height="2.5rem" />
-          </>
-        ) : (
-          <>
-            <Styled.Title>Teste Técnico - Expresso Consultoria</Styled.Title>
+        <Styled.Title>Teste Técnico - Expresso Consultoria</Styled.Title>
 
-            <Styled.FormGroup>
-              <Styled.StyledInput
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Nome"
-              />
-              <Styled.StyledInput
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                placeholder="Departamento"
-              />
-            </Styled.FormGroup>
+        <Styled.FormGroup>
+          <Styled.StyledInput
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Nome"
+          />
+          <Styled.StyledInput
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            placeholder="Departamento"
+          />
+        </Styled.FormGroup>
 
-            <Styled.StyledButton onClick={handleNavigate}>
-              Acessar Dashboard
-            </Styled.StyledButton>
-          </>
-        )}
+        <Styled.StyledButton onClick={handleNavigate}>
+          Acessar Dashboard
+        </Styled.StyledButton>
       </Styled.ContentCard>
     </Styled.Container>
   );

@@ -7,7 +7,6 @@ import { Skeleton } from 'primereact/skeleton';
 
 export default function Header() {
   const { user } = useUser();
-  console.log('User data in Header:', user);
 
   const isLoading = !user.name;
 
