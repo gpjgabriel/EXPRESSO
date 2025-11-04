@@ -18,10 +18,10 @@ export default function Dashboard() {
         setStartDate(start);
         setEndDate(end);
       }} />
-      <InfoCards />
+      <InfoCards startDate={startDate} endDate={endDate}/>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', margin: '1rem 1rem' }}>
         <PeriodChart startDate={startDate} endDate={endDate} />
-        <ResultTable />
+        <ResultTable startDate={startDate} endDate={endDate} />
       </div>
     </>
   );
