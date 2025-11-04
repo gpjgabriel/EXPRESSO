@@ -6,80 +6,56 @@ import { Column } from 'primereact/column';
 import * as Styled from './styles.js';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
+import useFinanceData from '@/hooks/useFinanceData.js';
 
-const MOCK_DATA = [
-  { nome: 'Carlos Silva', despesa: 1200, receita: 2500 },
-  { nome: 'Ana Souza', despesa: 800, receita: 1800 },
-  { nome: 'João Pereira', despesa: 1500, receita: 2100 },
-  { nome: 'Mariana Costa', despesa: 1000, receita: 900 },
-  { nome: 'Rafael Lima', despesa: 700, receita: 1200 },
-  { nome: 'Danilo Silva', despesa: 1200, receita: 500 },
-  { nome: 'Renato Souza', despesa: 800, receita: 1800 },
-];
 
-const getTotals = (data) => {
-  const totalDespesa = data.reduce((acc, item) => acc + item.despesa, 0);
-  const totalReceita = data.reduce((acc, item) => acc + item.receita, 0);
+export default function ResultTable({ startDate, endDate }) {
+  const { data, loading } = useFinanceData(startDate, endDate);
+
+  if (loading) return <p style={{ flex: 1}}>Carregando tabela...</p>; // SUBSTITUIR POR SKELETON DEPOIS
+
+  const grouped = Object.values(
+    data.reduce((acc, item) => {
+      const nome = item.usuario;
+      if (!acc[nome]) acc[nome] = { nome, receita: 0, despesa: 0 };
+      acc[nome].receita += item.receita;
+      acc[nome].despesa += item.despesa;
+      return acc;
+    }, {})
+  );
+
+  const totalDespesa = grouped.reduce((a, b) => a + b.despesa, 0);
+  const totalReceita = grouped.reduce((a, b) => a + b.receita, 0);
   const totalResultado = totalReceita - totalDespesa;
-  return { totalDespesa, totalReceita, totalResultado };
-};
 
-export default function ResultTable() {
-  const totals = getTotals(MOCK_DATA);
-
-  const resultadoTemplate = (rowData) => {
+    const resultadoTemplate = (rowData) => {
     const resultado = rowData.receita - rowData.despesa;
-    const isPositive = resultado >= 0;
-    const icon = isPositive ? 'pi pi-arrow-up' : 'pi pi-arrow-down';
-    const color = isPositive ? '#16a34a' : '#dc2626';
-
+    const color = resultado >= 0 ? '#16a34a' : '#dc2626';
+    const icon = resultado >= 0 ? 'pi pi-arrow-up' : 'pi pi-arrow-down';
     return (
-      <span style={{ color, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.3rem' }}>
+      <span style={{ color, display: 'flex', alignItems: 'center', gap: '0.3rem', justifyContent: 'center' }}>
         R$ {resultado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} <i className={icon}></i>
       </span>
     );
   };
-
-  const despesaTemplate = (rowData) => (
-    <>R$ {rowData.despesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</>
-  );
-
-  const receitaTemplate = (rowData) => (
-    <>R$ {rowData.receita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</>
-  );
-
+  
   const footerGroup = (
     <ColumnGroup>
       <Row>
-        <Column
-          footer="Total"
-          footerStyle={{ textAlign: 'center', fontWeight: 'bold', color: '#fff' }}
-        />
-        <Column
-          footer={`R$ ${totals.totalDespesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
-          footerStyle={{ textAlign: 'center', color: '#fff' }}
-        />
-        <Column
-          footer={`R$ ${totals.totalReceita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
-          footerStyle={{ textAlign: 'center', color: '#fff' }}
-        />
-        <Column
-          footer={`R$ ${totals.totalResultado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
-          footerStyle={{ textAlign: 'center', color: '#fff' }}
-        />
+        <Column footer="Total" />
+        <Column footer={`R$ ${totalDespesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
+        <Column footer={`R$ ${totalReceita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
+        <Column footer={`R$ ${totalResultado.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
       </Row>
     </ColumnGroup>
   );
 
   return (
     <Styled.TableWrapper>
-      <DataTable
-        value={MOCK_DATA}
-        footerColumnGroup={footerGroup}
-      >
+      <DataTable value={grouped} footerColumnGroup={footerGroup}>
         <Column field="nome" header="Nome" />
-        <Column field="despesa" header="Despesa" body={despesaTemplate} />
-        <Column field="receita" header="Receita" body={receitaTemplate} />
+        <Column field="despesa" header="Despesa" body={(d) => `R$ ${d.despesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
+        <Column field="receita" header="Receita" body={(d) => `R$ ${d.receita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
         <Column header="Resultado" body={resultadoTemplate} />
       </DataTable>
     </Styled.TableWrapper>
