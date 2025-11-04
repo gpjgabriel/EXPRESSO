@@ -7,12 +7,13 @@ import * as Styled from './styles.js';
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 import useFinanceData from '@/hooks/useFinanceData.js';
+import { ProgressBar } from 'primereact/progressbar';
 
 
 export default function ResultTable({ startDate, endDate }) {
   const { data, loading } = useFinanceData(startDate, endDate);
 
-  if (loading) return <p style={{ flex: 1}}>Carregando tabela...</p>; // SUBSTITUIR POR SKELETON DEPOIS
+  // if (loading) return <p style={{ flex: 1}}>Carregando tabela...</p>; // SUBSTITUIR POR SKELETON DEPOIS
 
   const grouped = Object.values(
     data.reduce((acc, item) => {
@@ -51,13 +52,22 @@ export default function ResultTable({ startDate, endDate }) {
   );
 
   return (
-    <Styled.TableWrapper>
-      <DataTable value={grouped} footerColumnGroup={footerGroup}>
-        <Column field="nome" header="Nome" />
-        <Column field="despesa" header="Despesa" body={(d) => `R$ ${d.despesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
-        <Column field="receita" header="Receita" body={(d) => `R$ ${d.receita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
-        <Column header="Resultado" body={resultadoTemplate} />
-      </DataTable>
-    </Styled.TableWrapper>
+    <div style={{flex: 1}}>
+      <Styled.TableWrapper>
+        <DataTable
+          value={grouped}
+          footerColumnGroup={footerGroup}
+          loading={loading}
+          loadingIcon={<ProgressBar mode="indeterminate" style={{ height: '4px', width: '100%' }} />}
+          emptyMessage="Nenhum registro encontrado"
+          style={{ minWidth: '100%' }}
+        >
+          <Column field="nome" header="Nome" />
+          <Column field="despesa" header="Despesa" body={(d) => `R$ ${d.despesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
+          <Column field="receita" header="Receita" body={(d) => `R$ ${d.receita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} />
+          <Column header="Resultado" body={resultadoTemplate} />
+        </DataTable>
+      </Styled.TableWrapper>
+    </div>
   );
 }
