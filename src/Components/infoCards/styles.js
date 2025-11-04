@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+
 
 export const CardsContainer = styled.div`
   display: flex;
@@ -34,21 +34,27 @@ export const CardHeader = styled.div`
 
 export const CardValuesContainer = styled.div`
   display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
   gap: 1rem;
+  flex-grow: 1;
   margin-top: 0.5rem;
 
   .card-value-block {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    min-height: 50px;
   }
 
   .value-label {
     font-size: 0.8rem;
     color: #6b7280;
+    margin-bottom: 0.2rem;
   }
 
   .card-value {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
   }
 `;

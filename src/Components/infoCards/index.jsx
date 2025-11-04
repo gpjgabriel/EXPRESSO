@@ -29,7 +29,7 @@ export default function InfoCards({ startDate, endDate }) {
       values: [`R$ ${totalDespesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`] },
     { title: 'Lucro Líquido', 
       icon: 'pi pi-chart-line', 
-      borderColor: 'yellow', 
+      borderColor: 'yellow',
       values: [`R$ ${(totalReceita - totalDespesa).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`] },
     {
       title: 'Contas Vencidas',
