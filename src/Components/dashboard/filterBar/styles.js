@@ -24,6 +24,8 @@ export const FilterContainer = styled.div`
 
   .input-label {
     font-weight: 500;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
   }
 
   .button-container {
