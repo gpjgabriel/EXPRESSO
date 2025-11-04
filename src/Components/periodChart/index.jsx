@@ -91,7 +91,7 @@ export default function PeriodChart({ startDate, endDate }) {
 
   return (
     <ChartContainer>
-      <h3 style={{marginBottom: '1rem'}}>Resultados por Período</h3>
+      <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>Resultados por Período</span>
       <Chart type="line" data={chartData} options={chartOptions} />
     </ChartContainer>
   );

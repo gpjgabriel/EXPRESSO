@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 export const CardsContainer = styled.div`
   display: flex;
   gap: 1rem;
-  margin: 1rem 2rem;
+  margin: 1rem;
   flex-wrap: wrap;
 
   .p-card .p-card-content {
