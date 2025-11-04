@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 export const FilterContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   background-color: #ffffff;
   padding: 1rem 1.5rem;
@@ -14,6 +15,13 @@ export const FilterContainer = styled.div`
   flex-wrap: wrap;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 
+  .filters-left {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
   .input-label {
     font-weight: 500;
     margin-bottom: 0.25rem;
@@ -22,6 +30,7 @@ export const FilterContainer = styled.div`
   .button-container {
     display: flex;
     gap: 0.5rem;
+    align-items: flex-end;
   }
 `;
 
@@ -41,8 +50,28 @@ export const CalendarInput = styled(Calendar)`
     min-width: 150px;
 `;
 
+export const PdfButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: #ede9fe;
+  color: #4c1d95;
+  border: none;
+
+  &:hover {
+    background-color: #ddd6fe;
+  }
+`;
+
 export const FilterButton = styled(Button)`
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  background-color: #6b21a8;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: #7c3aed;
+  }
 `;
