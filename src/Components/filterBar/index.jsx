@@ -4,24 +4,40 @@ import * as Styled from './styles.js';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from 'primereact/checkbox';
+import useFinanceData from '@/hooks/useFinanceData.js';
+import LoadingFilterBar from './loading.js';
 
 
 export default function FilterBar({ onDateChange }) {
-  const [center, setCenter] = useState(null);
   const [dataStart, setDataStart] = useState(null);
   const [dataEnd, setDataEnd] = useState(null);
   const [emitidos, setEmitidos] = useState(false);
+  const [allCenters, setAllCenters] = useState([]);
+  const [center, setCenter] = useState(null);
+  const [localLoading, setLocalLoading] = useState(true);
+  
+  const { data, loading: hookLoading } = useFinanceData(dataStart, dataEnd);
 
-  const centers = Array.from({ length: 50 }, (_, i) => ({
-    label: `Centro ${i + 1}`,
-    value: `center-${i + 1}`
-  }));
+  useEffect(() => {
+    if (!hookLoading) {
+      const uniqueCenters = Array.from(
+        new Set(data.map(item => item.centroCusto))
+      ).map(label => ({ label, value: label }));
+
+      setAllCenters(uniqueCenters);
+      setLocalLoading(false);
+    }
+  }, [data, hookLoading]);
+
 
   useEffect(() => {
     if (onDateChange) {
+      setLocalLoading(true);
       onDateChange(dataStart, dataEnd);
     }
   }, [dataStart, dataEnd, onDateChange]);
+
+  if (localLoading) return <LoadingFilterBar />;
 
   return (
     <Styled.FilterContainer>
@@ -33,7 +49,7 @@ export default function FilterBar({ onDateChange }) {
           <Dropdown
             value={center}
             onChange={(e) => setCenter(e.value)}
-            options={centers}
+            options={allCenters}
             scrollHeight="200px"
             virtualScrollerOptions={{ itemSize: 38 }}
             placeholder="Selecione"
