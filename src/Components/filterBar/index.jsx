@@ -1,12 +1,12 @@
 'use client';
 
 import * as Styled from './styles.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from 'primereact/checkbox';
 
 
-export default function FilterBar() {
+export default function FilterBar({ onDateChange }) {
   const [center, setCenter] = useState(null);
   const [dataStart, setDataStart] = useState(null);
   const [dataEnd, setDataEnd] = useState(null);
@@ -16,6 +16,12 @@ export default function FilterBar() {
     label: `Centro ${i + 1}`,
     value: `center-${i + 1}`
   }));
+
+  useEffect(() => {
+    if (onDateChange) {
+      onDateChange(dataStart, dataEnd);
+    }
+  }, [dataStart, dataEnd, onDateChange]);
 
   return (
     <Styled.FilterContainer>
