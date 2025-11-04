@@ -4,12 +4,13 @@ import React from 'react';
 import { Chart } from 'primereact/chart';
 import * as Styled from './styles.js';
 import useFinanceData from '@/hooks/useFinanceData.js';
+import { LoadingChart } from './loading.js';
 
 
 export default function PeriodChart({ startDate, endDate }) {
   const { data, loading } = useFinanceData(startDate, endDate);
 
-  if (loading) return <p>Carregando gráfico...</p>; // SUBSTITUIR POR SKELETON DEPOIS
+  if (loading) return <LoadingChart />;
 
   const grouped = data.reduce((acc, item) => {
     const date = new Date(item.data).toLocaleDateString('pt-BR');
