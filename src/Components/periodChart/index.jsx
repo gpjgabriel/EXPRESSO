@@ -1,98 +1,61 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Chart } from 'primereact/chart';
-import { ChartContainer, ChartTitle } from './styles.js';
+import * as Styled from './styles.js';
+import useFinanceData from '@/hooks/useFinanceData.js';
 
-const MOCK_DATA = [
-  { date: '2025-01-01', value1: 1000, value2: -800 },
-  { date: '2025-02-02', value1: 1200, value2: -1950 },
-  { date: '2025-03-03', value1: 900,  value2: -700 },
-  { date: '2025-04-04', value1: 1500, value2: -1300 },
-  { date: '2025-05-05', value1: 800,  value2: 0 },
-  { date: '2025-06-06', value1: 1700, value2: 0 },
-  { date: '2025-07-07', value1: 2000, value2: 0 },
-  { date: '2025-08-08', value1: 0, value2: 0 },
-  { date: '2025-09-09', value1: 800, value2: 0 },
-  { date: '2025-10-10', value1: 0, value2: 0 },
-  { date: '2025-11-11', value1: 2000, value2: 0 },
-];
 
 export default function PeriodChart({ startDate, endDate }) {
-  const [filteredData, setFilteredData] = useState(MOCK_DATA);
+  const { data, loading } = useFinanceData(startDate, endDate);
 
-  useEffect(() => {
-    if (startDate && endDate) {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+  if (loading) return <p>Carregando gráfico...</p>; // SUBSTITUIR POR SKELETON DEPOIS
 
-      const filtered = MOCK_DATA.filter((d) => {
-        const current = new Date(d.date);
-        return current >= start && current <= end;
-      });
+  const grouped = data.reduce((acc, item) => {
+    const date = new Date(item.data).toLocaleDateString('pt-BR');
+    if (!acc[date]) acc[date] = { receita: 0, despesa: 0 };
+    acc[date].receita += item.receita;
+    acc[date].despesa += item.despesa;
+    return acc;
+  }, {});
 
-      setFilteredData(filtered);
-    } else {
-      setFilteredData(MOCK_DATA);
-    }
-  }, [startDate, endDate]);
+  const labels = Object.keys(grouped);
+  const receitas = labels.map((d) => grouped[d].receita);
+  const despesas = labels.map((d) => grouped[d].despesa);
 
   const chartData = {
-    labels: filteredData.map((d) => new Date(d.date).toLocaleDateString('pt-BR')),
+    labels,
     datasets: [
       {
-        label: 'Resultado 1 (R$)',
-        data: filteredData.map((d) => d.value1),
-        fill: false,
+        label: 'Receita (R$)',
+        data: receitas,
         borderColor: '#6b21a8',
+        fill: false,
         tension: 0.4,
-        pointBackgroundColor: '#6b21a8',
       },
       {
-        label: 'Resultado 2 (R$)',
-        data: filteredData.map((d) => d.value2),
-        fill: false,
+        label: 'Despesa (R$)',
+        data: despesas,
         borderColor: '#2563eb',
+        fill: false,
         tension: 0.4,
-        pointBackgroundColor: '#2563eb',
       },
     ],
   };
 
   const chartOptions = {
     responsive: true,
-    plugins: {
-      legend: {
-        labels: {
-          color: '#4b0082',
-          font: { size: 12 },
-        },
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => `R$ ${context.parsed.y.toFixed(2)}`,
-        },
-      },
-    },
+    plugins: { legend: { labels: { color: '#6b21a8' } } },
     scales: {
-      x: {
-        ticks: { color: '#6b7280' },
-        grid: { color: '#e5e7eb' },
-      },
-      y: {
-        ticks: {
-          color: '#6b7280',
-          callback: (value) => `R$ ${value}`,
-        },
-        grid: { color: '#f3f4f6' },
-      },
+      x: { ticks: { color: '#6b7280' } },
+      y: { ticks: { color: '#6b7280', callback: (v) => `R$ ${v}` } },
     },
   };
 
   return (
-    <ChartContainer>
+    <Styled.ChartContainer>
       <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>Resultados por Período</span>
       <Chart type="line" data={chartData} options={chartOptions} />
-    </ChartContainer>
+    </Styled.ChartContainer>
   );
 }
