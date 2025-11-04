@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import * as Styled from './styles.js';
 import { useUser  } from '@/context/UserContext';
-import { Skeleton } from 'primereact/skeleton';
-import Loading from './loading.js';
+import LoadingLogin from './loading.js';
 
 
 export default function Login() {
@@ -32,7 +31,7 @@ export default function Login() {
       router.push('/dashboard');
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingLogin />;
 
   return (
     <Styled.Container>

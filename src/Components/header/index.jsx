@@ -2,7 +2,7 @@
 
 import * as Styled from './styles.js';
 import { useUser } from '@/context/UserContext';
-import Loading from './loading.js';
+import LoadingHeader from './loading.js';
 
 
 export default function Header() {
@@ -15,7 +15,7 @@ export default function Header() {
     { label: 'Relatórios', icon: 'pi pi-chart-bar' },
   ];
 
-  if (!user.name) return <Loading />;
+  if (!user.name) return <LoadingHeader />;
 
   return (
     <Styled.Header>

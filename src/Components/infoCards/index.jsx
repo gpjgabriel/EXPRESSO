@@ -3,12 +3,11 @@
 import useFinanceData from '@/hooks/useFinanceData';
 import * as Styled from './styles';
 import { Button } from 'primereact/button';
+import LoadingInfoCards from './loading';
 
 
 export default function InfoCards({ startDate, endDate }) {
   const { data, loading } = useFinanceData(startDate, endDate);
-
-  if (loading) return <p>Carregando dados...</p>; // APLICAR SKELETON AQUI DEPOIS
   
   const totalReceita = data.reduce((acc, d) => acc + d.receita, 0);
   const totalDespesa = data.reduce((acc, d) => acc + d.despesa, 0);
@@ -53,6 +52,8 @@ export default function InfoCards({ startDate, endDate }) {
       ]
     },
   ];
+
+  if (loading) return <LoadingInfoCards />;
 
   return (
     <Styled.CardsContainer>

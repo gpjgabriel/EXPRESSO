@@ -3,7 +3,7 @@
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export default function Loading() {
+export default function LoadingHeader() {
   return (
     <div style={{
       display: 'flex',
