@@ -2,55 +2,56 @@
 
 # 📊 Dashboard Financeiro — Next.js + PrimeReact
 
+
 Um painel administrativo moderno e responsivo para visualização e análise de dados financeiros, desenvolvido com **Next.js**, **PrimeReact** e **Styled-components**.  
 O sistema simula a integração com uma API financeira e apresenta recursos como filtros por data, gráficos de desempenho, indicadores resumidos (cards) e tabela de resultados.
 
 
 ## 🚀 Tecnologias e Ferramentas Utilizadas
 
-| **Framework Web** | [Next.js 14+](https://nextjs.org/) | Framework React com suporte a SSR e rotas App Router |
-| **UI Components** | [PrimeReact](https://primereact.org/) | Biblioteca de componentes visuais com tema moderno |
-| **Estilização** | [Styled-components](https://styled-components.com/) | CSS-in-JS para escopar estilos e customizar componentes |
-| **Gráficos** | [Chart.js](https://www.chartjs.org/) via `primereact/chart` | Exibição de dados financeiros por período |
-| **Estado / Hooks** | React Hooks (`useState`, `useEffect`) | Gerenciamento de estado e efeitos assíncronos |
-| **Mock API** | Arquivo `mockData.js` | Simulação de dados vindos de uma API financeira |
-| **Skeleton Loading** | PrimeReact `Skeleton` / `ProgressBar` | Placeholders visuais durante o carregamento |
+
+| **Framework Web** | [Next.js 14+](https://nextjs.org/) | Framework React com suporte a SSR e rotas App Router |  
+| **UI Components** | [PrimeReact](https://primereact.org/) | Biblioteca de componentes visuais com tema moderno |  
+| **Estilização** | [Styled-components](https://styled-components.com/) | CSS-in-JS para escopar estilos e customizar componentes |  
+| **Gráficos** | [Chart.js](https://www.chartjs.org/) via `primereact/chart` | Exibição de dados financeiros por período |  
+| **Estado / Hooks** | React Hooks (`useState`, `useEffect`) | Gerenciamento de estado e efeitos assíncronos |  
+| **Mock API** | Arquivo `mockData.js` | Simulação de dados vindos de uma API financeira |  
+| **Skeleton Loading** | PrimeReact `Skeleton` / `ProgressBar` | Placeholders visuais durante o carregamento |  
 
 
 ## 📁 Estrutura do Projeto
 
-📦 src
-┣ 📂 app
-┃ ┣ 📜 page.js # Página de acesso ao Login
-┃ ┗ 📂 dashboard
-┃    ┗ 📜 page.js # Página principal do dashboard
-┣ 📂 Components
-┃ ┣ 📂 dashboard
-┃ ┃ ┣ 📂 header # Cabeçalho fixo do sistema
-┃ ┃ ┣ 📂 filterBar # Barra de filtros (datas, centro de custo, emitidos)
-┃ ┃ ┃ ┣ 📜 filterBar.jsx
-┃ ┃ ┃ ┣ 📜 styles.js
-┃ ┃ ┃ ┗ 📜 loading.js # Skeleton da barra de filtros
-┃ ┃ ┣ 📂 infoCards # Cards com indicadores financeiros
-┃ ┃ ┃ ┣ 📜 infoCards.jsx
-┃ ┃ ┃ ┣ 📜 styles.js
-┃ ┃ ┃ ┗ 📜 loading.js # Skeleton dos cards
-┃ ┃ ┣ 📂 periodChart # Gráfico de linha (Receita x Despesa)
-┃ ┃ ┃ ┣ 📜 periodChart.jsx
-┃ ┃ ┃ ┣ 📜 styles.js
-┃ ┃ ┃ ┗ 📜 loading.js # Skeleton do gráfico
-┃ ┃ ┣ 📂 resultTable # Tabela de resultados agrupados
-┃ ┃   ┣ 📜 resultTable.jsx
-┃ ┃   ┣ 📜 styles.js
-┃ ┃   ┗ 📜 loading.js # Skeleton da tabela
-┣ 📂 context
-┃ ┗ 📜 UserContext.js # Context API para controle de estado do login
-┣ 📂 hooks
-┃ ┗ 📜 useFinanceData.js # Hook customizado para buscar e filtrar dados da API mockada
-┣ 📂 data
-┃ ┗ 📜 mockData.js # Mock de dados financeiros (simula a API /api/finance)
-┗ 📜 globals.css # Estilos globais opcionais
-
+📦 src  
+┣ 📂 app  
+┃ ┣ 📜 page.js # Página de acesso ao Login  
+┃ ┗ 📂 dashboard  
+┃    ┗ 📜 page.js # Página principal do dashboard  
+┣ 📂 Components  
+┃ ┣ 📂 dashboard  
+┃ ┃ ┣ 📂 header # Cabeçalho fixo do sistema  
+┃ ┃ ┣ 📂 filterBar # Barra de filtros (datas, centro de custo, emitidos)  
+┃ ┃ ┃ ┣ 📜 filterBar.jsx  
+┃ ┃ ┃ ┣ 📜 styles.js  
+┃ ┃ ┃ ┗ 📜 loading.js # Skeleton da barra de filtros  
+┃ ┃ ┣ 📂 infoCards # Cards com indicadores financeiros  
+┃ ┃ ┃ ┣ 📜 infoCards.jsx  
+┃ ┃ ┃ ┣ 📜 styles.js  
+┃ ┃ ┃ ┗ 📜 loading.js # Skeleton dos cards  
+┃ ┃ ┣ 📂 periodChart # Gráfico de linha (Receita x Despesa)  
+┃ ┃ ┃ ┣ 📜 periodChart.jsx  
+┃ ┃ ┃ ┣ 📜 styles.js  
+┃ ┃ ┃ ┗ 📜 loading.js # Skeleton do gráfico  
+┃ ┃ ┣ 📂 resultTable # Tabela de resultados agrupados  
+┃ ┃   ┣ 📜 resultTable.jsx  
+┃ ┃   ┣ 📜 styles.js  
+┃ ┃   ┗ 📜 loading.js # Skeleton da tabela  
+┣ 📂 context  
+┃ ┗ 📜 UserContext.js # Context API para controle de estado do login  
+┣ 📂 hooks  
+┃ ┗ 📜 useFinanceData.js # Hook customizado para buscar e filtrar dados da API mockada  
+┣ 📂 data  
+┃ ┗ 📜 mockData.js # Mock de dados financeiros (simula a API /api/finance)  
+┗ 📜 globals.css # Estilos globais opcionais  
 
 
 ## 🧠 Principais Funcionalidades
@@ -65,40 +66,47 @@ O sistema simula a integração com uma API financeira e apresenta recursos como
 ✅ **Mock API Simulada** — os dados vêm de `mockData.js`, simulando uma chamada HTTP real (`/api/finance`).
 
 
------
-
 
 ## ⚙️ Como Executar o Projeto
 
+
 ### 1️⃣ Clonar o repositório
 ---> bash (Terminal)
+
 git clone https://github.com/gpjgabriel/EXPRESSO.git
 cd expresso
 
 ### 2️⃣ Instalar dependências
-npm install
-# ou
-yarn install
+npm install  
+ ou  
+yarn install  
 
 ### 3️⃣ Executar em modo de desenvolvimento
-npm run dev
-# ou
-yarn dev
+npm run dev  
+ ou  
+yarn dev  
 
 O projeto estará disponível em:
-👉 http://localhost:3000
+👉 http://localhost:3000  
+  
+🔑 Para login:  
+  👨‍💻 Usuário: Admin | Departamento: Financeiro  
+  ou  
+  ⬇️ Clique no botão que já será redirecionado com o usuário padrão.  
 
 
-🧪 Próximos Passos
 
-🔄 Conectar a uma API real
-🧮 Adicionar as funcionalidades aos boões de menu, pesquisa e exportar para PDF.
+## 🧪 Próximos Passos
 
 
------
+🔄 Conectar a uma API real  
+🧮 Adicionar as funcionalidades aos boões de menu, pesquisa e exportar para PDF.  
+✔️ Adicionar testes unitários e de integração  
+
+
 
 👨‍💻 Autor
 
-Desenvolvido por: Gabriel Paiva Justo
-📧 gpj_gabriel@hotmail.com
-💼 LinkedIn: linkedin.com/in/gabriel-paiva-justo
+Desenvolvido por: Gabriel Paiva Justo  
+📧 gpj_gabriel@hotmail.com  
+💼 LinkedIn: linkedin.com/in/gabriel-paiva-justo  
