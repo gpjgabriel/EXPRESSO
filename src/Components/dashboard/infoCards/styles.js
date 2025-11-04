@@ -10,6 +10,10 @@ export const CardsContainer = styled.div`
   .p-card .p-card-content {
     padding: 0;
   }
+
+  .p-card .p-card-body {
+    padding: 0 1rem 1rem;
+  }
 `;
 
 export const CardContent = styled(Card)`
@@ -24,22 +28,19 @@ export const CardContent = styled(Card)`
   background-color: #ffffff;
   overflow: hidden;
 
-  h4 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #111827;
-  }
-
-  .card-icon {
-    color: inherit;
-    font-weight: bold;
-  }
 `;
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #6b7280;
+    margin: 0;
+  }
 
   .pi {
     font-size: 1.2rem;
@@ -63,7 +64,7 @@ export const CardValuesContainer = styled.div`
   }
 
   .value-label {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: #6b7280;
     margin-bottom: 0.2rem;
   }

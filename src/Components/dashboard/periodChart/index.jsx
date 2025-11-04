@@ -55,7 +55,7 @@ export default function PeriodChart({ startDate, endDate }) {
 
   return (
     <Styled.ChartContainer>
-      <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>Resultados por Período</span>
+      <span style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#6b7280' }}>Resultados por Período</span>
       <Chart type="line" data={chartData} options={chartOptions} />
     </Styled.ChartContainer>
   );

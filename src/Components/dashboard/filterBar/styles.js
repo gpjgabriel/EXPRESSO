@@ -24,13 +24,17 @@ export const FilterContainer = styled.div`
 
   .input-label {
     font-weight: 500;
-    margin-bottom: 0.25rem;
   }
 
   .button-container {
     display: flex;
     gap: 0.5rem;
     align-items: flex-end;
+  }
+
+  .p-checkbox-box {
+    border: 2px solid #7c3aed !important;
+    transition: all 0.2s ease;
   }
 `;
 

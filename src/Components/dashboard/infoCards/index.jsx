@@ -28,7 +28,7 @@ export default function InfoCards({ startDate, endDate }) {
     {
       title: 'Contas Vencidas',
       icon: 'pi pi-calendar-times',
-      borderColor: '#2563eb',
+      borderColor: '#0ea5e9',
       labels: ['Receber', 'A Pagar'],
       values: [
         `R$ ${contasVencidasReceber.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
@@ -38,7 +38,7 @@ export default function InfoCards({ startDate, endDate }) {
     {
       title: 'Contas a Vencer',
       icon: 'pi pi-calendar-clock',
-      borderColor: '#2563eb',
+      borderColor: '#0ea5e9',
       labels: ['Receber', 'A Pagar'],
       values: [
         `R$ ${contasAVencerReceber.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
@@ -54,10 +54,10 @@ export default function InfoCards({ startDate, endDate }) {
       {cardsData.map((card, index) => (
         <Styled.CardContent key={index}>
           <Styled.CardHeader>
-            <h4 style={{ margin: 0 }}>{card.title}</h4>
+            <h4 className='card-title'>{card.title}</h4>
             <Button
               icon={card.icon}
-              className="p-button-text p-button-rounded card-icon"
+              className="p-button-text p-button-rounded"
               style={{
               color: card.borderColor,
               }}
