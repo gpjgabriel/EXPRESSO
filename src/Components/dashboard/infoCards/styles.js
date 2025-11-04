@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Card } from 'primereact/card';
 
-
 export const CardsContainer = styled.div`
   display: flex;
   gap: 1rem;
@@ -10,7 +9,7 @@ export const CardsContainer = styled.div`
 
   .p-card .p-card-content {
     padding: 0;
-  } 
+  }
 `;
 
 export const CardContent = styled(Card)`
@@ -21,15 +20,31 @@ export const CardContent = styled(Card)`
   justify-content: space-between;
   min-width: 150px;
   border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   overflow: hidden;
+
+  h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .card-icon {
+    color: inherit;
+    font-weight: bold;
+  }
 `;
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .pi {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 `;
 
 export const CardValuesContainer = styled.div`
@@ -56,6 +71,14 @@ export const CardValuesContainer = styled.div`
   .card-value {
     font-size: 1rem;
     font-weight: 600;
+  }
+
+  .no-label .card-value {
+    font-size: 1.25rem;
+  }
+
+  .lucro .card-value {
+    font-size: 1.8rem;
   }
 `;
 

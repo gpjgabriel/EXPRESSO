@@ -1,9 +1,9 @@
 'use client';
-import Header from '@/Components/header';
-import FilterBar from '@/Components/filterBar';
-import InfoCards from '@/Components/infoCards';
-import PeriodChart from '@/Components/periodChart';
-import ResultTable from '@/Components/resultTable';
+import Header from '@/Components/dashboard/header';
+import FilterBar from '@/Components/dashboard/filterBar';
+import InfoCards from '@/Components/dashboard/infoCards';
+import PeriodChart from '@/Components/dashboard/periodChart';
+import ResultTable from '@/Components/dashboard/resultTable';
 import { useState } from 'react';
 
 

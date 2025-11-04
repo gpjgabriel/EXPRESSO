@@ -19,22 +19,16 @@ export default function InfoCards({ startDate, endDate }) {
   const contasAVencerPagar = data.reduce((acc, d) => acc + d.contasAVencer.aPagar, 0);
 
   const cardsData = [
-    { title: 'Receita Total', 
-      icon: 'pi pi-chart-line', 
-      borderColor: 'green', 
+    { title: 'Total Receita', icon: 'pi pi-arrow-circle-up', borderColor: '#16a34a', 
       values: [`R$ ${totalReceita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`] },
-    { title: 'Despesa Total', 
-      icon: 'pi pi-chart-line', 
-      borderColor: 'red', 
+    { title: 'Total Despesa', icon: 'pi pi-arrow-circle-down', borderColor: '#dc2626', 
       values: [`R$ ${totalDespesa.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`] },
-    { title: 'Lucro Líquido', 
-      icon: 'pi pi-chart-line', 
-      borderColor: 'yellow',
-      values: [`R$ ${(totalReceita - totalDespesa).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`] },
+    { title: 'Lucro Líquido', icon: 'pi pi-thumbs-up', borderColor: '#eab308', 
+      values: [`R$ ${(totalReceita - totalDespesa).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`], isLucro: true },
     {
       title: 'Contas Vencidas',
-      icon: 'pi pi-exclamation-triangle',
-      borderColor: 'blue',
+      icon: 'pi pi-calendar-times',
+      borderColor: '#2563eb',
       labels: ['Receber', 'A Pagar'],
       values: [
         `R$ ${contasVencidasReceber.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
@@ -43,8 +37,8 @@ export default function InfoCards({ startDate, endDate }) {
     },
     {
       title: 'Contas a Vencer',
-      icon: 'pi pi-clock',
-      borderColor: 'blue',
+      icon: 'pi pi-calendar-clock',
+      borderColor: '#2563eb',
       labels: ['Receber', 'A Pagar'],
       values: [
         `R$ ${contasAVencerReceber.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
@@ -61,12 +55,20 @@ export default function InfoCards({ startDate, endDate }) {
         <Styled.CardContent key={index}>
           <Styled.CardHeader>
             <h4 style={{ margin: 0 }}>{card.title}</h4>
-            <Button icon={card.icon} className="p-button-text p-button-rounded" />
+            <Button
+              icon={card.icon}
+              className="p-button-text p-button-rounded card-icon"
+              style={{
+              color: card.borderColor,
+              }}
+            />
           </Styled.CardHeader>
           
           <Styled.CardValuesContainer>
             {card.values.map((value, i) => (
-              <div className='card-value-block' key={i}>
+              <div
+                className={`card-value-block ${!card.labels ? 'no-label' : ''} ${card.isLucro ? 'lucro' : ''}`} key={i}
+              >
                 {card.labels && <span className='value-label'>{card.labels[i]}</span>}
                 <div className='card-value'>{value}</div>
               </div>
