@@ -34,8 +34,9 @@ export const NavButton = styled(Button)`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #6b7280;
+  color: #d1d5db;
   transition: color 0.2s;
+  padding: 0;
 
   .pi {
     font-size: 1.1rem;
@@ -60,20 +61,21 @@ export const UserInfo = styled.div`
   }
 
   .user-name {
-    color: #374151;
-    font-weight: 500;
+    color: #d1d5db;
+    font-weight: 600;
     font-size: 0.95rem;
   }
 
   .user-department {
-    color: #6b7280;
+    color: #374151;
+    font-weight: 600;
     font-size: 0.85rem;
   }
 `;
 
 export const UserAvatar = styled(Avatar)`
   background: #ede9fe;
-  color: #4c1d95;
+  color: #7c3aed;
   font-weight: 600;
   text-transform: uppercase;
 `;

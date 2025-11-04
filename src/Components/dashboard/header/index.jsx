@@ -38,7 +38,7 @@ export default function Header() {
               <span className='user-name'>{user.name}</span>
               <span className='user-department'>{user.department}</span>
             </div>
-            <Styled.UserAvatar label={user.name.charAt(0).toUpperCase()} size="large" />
+            <Styled.UserAvatar label={user.name.charAt(0).toUpperCase()} size="small" />
           </Styled.UserInfo>
         </Styled.RightMenu>
       </Styled.Nav>
