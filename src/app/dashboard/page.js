@@ -4,7 +4,7 @@ import FilterBar from '@/Components/filterBar';
 import InfoCards from '@/Components/infoCards';
 import PeriodChart from '@/Components/periodChart';
 import ResultTable from '@/Components/resultTable';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 
 export default function Dashboard() {
