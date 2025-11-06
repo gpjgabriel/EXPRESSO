@@ -1,7 +1,7 @@
 'use client'
 
 import * as Styled from './styles.js'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Dropdown } from 'primereact/dropdown'
 import { Checkbox } from 'primereact/checkbox'
 import LoadingFilterBar from './loading.js'
@@ -21,19 +21,24 @@ export default function FilterBar({
 }) {
   const [costCenterOptions, setCostCenterOptions] = useState([])
   const [totalCostCenters, setTotalCostCenters] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  // Carrega os Centros de Custo (infinite scroll)
   const loadCostCenters = async event => {
     setLoading(true)
 
-    const { first, rows } = event
+    const { first, last } = event
+    const take = last - first || ITEM_SIZE
 
     try {
-      const res = await fetch(`/api/cost-centers?skip=${first}&take=${rows}`)
+      const res = await fetch(`/api/cost-centers?skip=${first}&take=${take}`)
       const data = await res.json()
 
-      const newOptions = [...costCenterOptions]
+      let newOptions = [...costCenterOptions]
+
+      if (totalCostCenters === 0) {
+        newOptions = Array.from({ length: data.total })
+      }
+
       Array.from({ length: data.items.length }).forEach((_, i) => {
         newOptions[first + i] = data.items[i]
       })
@@ -47,29 +52,7 @@ export default function FilterBar({
     }
   }
 
-  useEffect(() => {
-    const fetchInitial = async () => {
-      setLoading(true)
-      try {
-        const res = await fetch(`/api/cost-centers?skip=0&take=${ITEM_SIZE}`)
-        const data = await res.json()
-
-        const options = Array.from({ length: data.total })
-        data.items.forEach((item, index) => {
-          options[index] = item
-        })
-
-        setCostCenterOptions(options)
-        setTotalCostCenters(data.total)
-      } catch (e) {
-        console.error(e)
-      }
-      setLoading(false)
-    }
-    fetchInitial()
-  }, [])
-
-  if (loading && totalCostCenters === 0) return <LoadingFilterBar />
+  if (totalCostCenters === 0 && loading) return <LoadingFilterBar />
 
   return (
     <Styled.FilterContainer>
@@ -85,10 +68,10 @@ export default function FilterBar({
             optionLabel="name"
             placeholder="Selecione"
             style={{ minWidth: '200px' }}
-            lazy={true}
             virtualScrollerOptions={{
+              lazy: true,
               itemSize: ITEM_SIZE,
-              totalRecords: totalCostCenters,
+              totalrecords: totalCostCenters,
               onLazyLoad: loadCostCenters,
               showLoader: true,
               loading: loading,
