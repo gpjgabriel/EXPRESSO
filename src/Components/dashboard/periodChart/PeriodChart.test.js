@@ -37,7 +37,7 @@ describe('PeriodChart Component', () => {
   })
 
   it('deve renderizar o skeleton de loading quando loading=true', () => {
-    render(<PeriodChart loading={true} apiData={null} />) // [cite: 43-1-1]
+    render(<PeriodChart loading={true} apiData={null} />)
 
     expect(screen.getByTestId('loading-chart-skeleton')).toBeInTheDocument()
 
