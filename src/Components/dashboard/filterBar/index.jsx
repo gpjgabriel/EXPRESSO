@@ -18,6 +18,7 @@ export default function FilterBar({
   issued,
   setIssued,
   onSearch,
+  onExportPDF,
 }) {
   const [costCenterOptions, setCostCenterOptions] = useState([])
   const [totalCostCenters, setTotalCostCenters] = useState(0)
@@ -110,7 +111,7 @@ export default function FilterBar({
       </div>
 
       <div className="button-container">
-        <Styled.PdfButton icon="pi pi-file-pdf" label="PDF" />
+        <Styled.PdfButton icon="pi pi-file-pdf" label="PDF" onClick={onExportPDF} />
         <Styled.FilterButton icon="pi pi-search" label="Pesquisar" onClick={onSearch} />
       </div>
     </Styled.FilterContainer>
