@@ -10,6 +10,7 @@ O sistema simula a integração com uma API financeira e apresenta recursos como
 - [x] Opções de Filtro por data e Centro de Custo (com lazy loading)
 - [x] Exportar para PDF
 - [x] Consumir os dados de API Rest
+- [x] Testes unitários e de Integração  
 
 ## 🚀 Tecnologias e Ferramentas Utilizadas
 
@@ -97,10 +98,6 @@ O projeto estará disponível em:
  👨‍💻 Usuário: Admin | Departamento: Financeiro  
  ou  
  ⬇️ Clique no botão que já será redirecionado com o usuário padrão.
-
-## 🧪 Próximos Passos
-
-- [ ] Adicionar testes unitários e de integração - _Em Desenvolvimento_
 
 👨‍💻 Autor
 
