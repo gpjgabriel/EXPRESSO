@@ -2,8 +2,14 @@
 
 # 📊 Dashboard Financeiro — Next.js + PrimeReact
 
-Um painel administrativo moderno e responsivo para visualização e análise de dados financeiros, desenvolvido com **Next.js**, **PrimeReact** e **Styled-components**.  
+Um painel administrativo moderno e responsivo para visualização e análise de dados financeiros, desenvolvido com **Next.js**, **PrimeReact** e **Styled-components**.
+
 O sistema simula a integração com uma API financeira e apresenta recursos como filtros por data, gráficos de desempenho, indicadores resumidos (cards) e tabela de resultados.
+
+- [x] Dashboard moderno e responsivo
+- [x] Opções de Filtro por data e Centro de Custo (com lazy loading)
+- [x] Exportar para PDF
+- [x] Consumir os dados de API Rest
 
 ## 🚀 Tecnologias e Ferramentas Utilizadas
 
@@ -94,9 +100,7 @@ O projeto estará disponível em:
 
 ## 🧪 Próximos Passos
 
-- [ ] Conectar a uma API real - _Em Desenvolvimento_
-- [ ] Adicionar as funcionalidades aos boões de menu, pesquisa e exportar para PDF.
-- [ ] Adicionar testes unitários e de integração
+- [ ] Adicionar testes unitários e de integração - _Em Desenvolvimento_
 
 👨‍💻 Autor
 
