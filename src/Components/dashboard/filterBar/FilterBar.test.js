@@ -5,6 +5,7 @@ import '@testing-library/jest-dom'
 import FilterBar from './index.jsx'
 
 jest.mock('./loading.js', () => () => <div data-testid="loading-filterbar" />)
+
 jest.mock('./styles.js', () => ({
   FilterContainer: ({ children }) => <div>{children}</div>,
   BackButton: () => <button />,
@@ -13,7 +14,6 @@ jest.mock('./styles.js', () => ({
   FilterButton: props => <button onClick={props.onClick}>{props.label}</button>,
 }))
 
-// Mock do Checkbox
 jest.mock('primereact/checkbox', () => ({
   Checkbox: props => (
     <input
@@ -26,7 +26,6 @@ jest.mock('primereact/checkbox', () => ({
   ),
 }))
 
-// Mock do Dropdown
 jest.mock('primereact/dropdown', () => {
   const React = require('react')
   return {
@@ -68,6 +67,7 @@ describe('FilterBar Component', () => {
   const mockSetCostCenter = jest.fn()
   const mockSetIssued = jest.fn()
   const mockOnSearch = jest.fn()
+  const mockOnExportPDF = jest.fn()
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -96,6 +96,7 @@ describe('FilterBar Component', () => {
           issued={false}
           setIssued={mockSetIssued}
           onSearch={mockOnSearch}
+          onExportPDF={mockOnExportPDF}
         />,
       )
     })
@@ -110,24 +111,20 @@ describe('FilterBar Component', () => {
 
   it('deve chamar a API de centros de custo e exibir os dados', async () => {
     await renderAndWait()
-
-    // Verifica se a API foi chamada
     expect(fetch).toHaveBeenCalledWith('/api/cost-centers?skip=0&take=10')
-
-    // Verifica se o item carregado aparece no dropdown
     expect(await screen.findByText('Centro de Custo Mock 1')).toBeInTheDocument()
   }, 15000)
 
   it('deve chamar as funções de "set" do componente pai ao alterar os filtros', async () => {
     await renderAndWait()
 
-    // Testa o Checkbox "Emitidos"
     const checkbox = screen.getByRole('checkbox')
+
     fireEvent.click(checkbox)
     expect(mockSetIssued).toHaveBeenCalledWith(true)
 
-    // Testa o Dropdown "Centro de Custo"
     const dropdown = screen.getByTestId('mock-dropdown')
+
     fireEvent.change(dropdown, { target: { value: 'cc1' } })
     expect(mockSetCostCenter).toHaveBeenCalledWith({ id: 'cc1', name: 'Centro de Custo Mock 1' })
   }, 15000)
@@ -136,7 +133,17 @@ describe('FilterBar Component', () => {
     await renderAndWait()
 
     const searchButton = screen.getByText('Pesquisar')
+
     fireEvent.click(searchButton)
     expect(mockOnSearch).toHaveBeenCalledTimes(1)
+  }, 15000)
+
+  it('deve chamar a função "onExportPDF" do pai ao clicar em "PDF"', async () => {
+    await renderAndWait()
+
+    const pdfButton = screen.getByText('PDF')
+    fireEvent.click(pdfButton)
+
+    expect(mockOnExportPDF).toHaveBeenCalledTimes(1)
   }, 15000)
 })
