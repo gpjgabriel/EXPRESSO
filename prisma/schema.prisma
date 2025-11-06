@@ -1,0 +1,50 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model CostCenter {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  transactions Transaction[]
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  transactions Transaction[]
+}
+
+// Tabela principal para os dados financeiros
+model Transaction {
+  id            String      @id @default(cuid())
+  date          DateTime    // Data da transação
+  description   String
+  type          String      // "RECEITA" ou "DESPESA"
+  value         Float       // Valor
+  
+  costCenter    CostCenter  @relation(fields: [costCenterId], references: [id])
+  costCenterId  String
+  
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+
+  // Para o filtro "Emitidos"
+  issued        Boolean     @default(false)
+}
+
+// Tabela separada para Contas a Pagar/Receber (para os InfoCards)
+model Bill {
+  id          String   @id @default(cuid())
+  description String
+  value       Float
+  dueDate     DateTime
+  type        String   // "A_PAGAR" ou "A_RECEBER"
+  status      String   // "PENDENTE" ou "PAGO"
+}
